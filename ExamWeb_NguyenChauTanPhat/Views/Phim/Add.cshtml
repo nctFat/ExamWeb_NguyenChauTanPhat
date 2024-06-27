@@ -1,0 +1,29 @@
+﻿@model Phim
+<form asp-action="Add" method="post">
+    <h2>Add Phim</h2>
+    <hr />
+    <div class="form-group">
+        <label>Tựa đề</label>
+        <input asp-for="TuaDe" class="form-control" />
+        <span asp-validation-for="TuaDe" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Trong nước</label>
+        <div style="padding-left:10px;">
+            <input type="checkbox" asp-for="TrongNuoc" class="form-check-input" />
+        </div>
+        <span asp-validation-for="TrongNuoc" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Giá vé</label>
+        <input asp-for="GiaVe" class="form-control" />
+        <span asp-validation-for="GiaVe" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Thời lượng</label>
+        <input asp-for="ThoiLuong" class="form-control" />
+        <span asp-validation-for="ThoiLuong" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary"> Save </button>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</form>

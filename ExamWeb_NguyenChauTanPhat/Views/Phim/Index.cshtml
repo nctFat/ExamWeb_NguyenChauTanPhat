@@ -1,0 +1,64 @@
+﻿@model List<Phim>
+
+<partial name="_ThongBao" />
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>DANH SÁCH PHIM</h2>
+    </div>
+    <div class="col-md-6 text-right">
+        <a asp-action="Add" class="btn btn-primary">
+            Thêm mới phim
+        </a>
+    </div>
+</div>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Tựa Đề</th>
+            <th>Thể Loại</th>
+            <th>Giá Vé</th>
+            <th>Thời lượng </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var x in Model)
+        {
+            <tr>
+                <td>@x.TuaDe</td>
+                <td>@(x.TrongNuoc ? "Trong Nước" : "Nước Ngoài")</td>
+                <td>@x.GiaVe.ToString("#,### VNĐ")</td>
+                <td>@x.ThoiLuong</td>
+                <td>
+                    <a asp-action="Update" asp-route-id="@x.Id" class="btn btn-success">
+                        Sửa
+                    </a>
+                    <a asp-action="Delete" asp-route-id="@x.Id" class="btn btn-danger">
+                        Xoá
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div style="display: flex; justify-content: center;">
+    <ul class="pagination">
+        <li class="page-item @(ViewBag.PageIndex == 1 ? "disabled" : "")">
+            <a class="page-link" asp-action="Index" asp-route-page="@(ViewBag.PageIndex - 1)">&laquo;</a>
+        </li>
+
+        @for (var i = 1; i <= ViewBag.PageSum; i++)
+        {
+            <li class="page-item @(ViewBag.PageIndex == i ? "active" : "")">
+                <a class="page-link" asp-action="Index" asp-route-page="@i">@i</a>
+            </li>
+        }
+
+        <li class="page-item @(ViewBag.PageIndex == ViewBag.PageSum ? "disabled" : "")">
+            <a class="page-link" asp-action="Index" asp-route-page="@(ViewBag.PageIndex + 1)">&raquo;</a>
+        </li>
+    </ul>
+</div>
+<div class="alert alert-info pt-2">
+    Có <b>@ViewBag.SUM </b> phim trong cửa hàng - Giá vé cao nhất là : <b>@ViewBag.MaxPrice.ToString("#,### VNĐ")</b>
+</div>
